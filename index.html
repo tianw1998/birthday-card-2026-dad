@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>給爸爸的生日卡片</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Opening screen overlay -->
+  <div id="opening-overlay" class="overlay">
+    <div class="opening-card">
+      <div class="opening-text">您已收到一份祝福🎉</div>
+      <button id="btn-start" class="btn-primary">查收</button>
+    </div>
+  </div>
+
+  <!-- Dialog window overlay -->
+  <div id="dialog-overlay" class="overlay hidden">
+    <div class="dialog-card">
+      <div id="dialog-title" class="dialog-title"></div>
+      <div id="dialog-body" class="dialog-body"></div>
+      <div class="dialog-actions">
+        <button id="btn-accept" class="btn-primary">接收</button>
+        <button id="btn-close" class="btn-secondary">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- End-game overlay -->
+  <div id="endgame-overlay" class="overlay hidden">
+    <div class="dialog-card">
+      <div class="dialog-title">🎂 你已收到全家人的祝福！</div>
+      <div class="dialog-actions">
+        <button id="btn-again" class="btn-primary">再接收一次祝福</button>
+        <button id="btn-done" class="btn-secondary">完美收下</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game area -->
+  <div id="game-wrap">
+    <div id="canvas-area">
+      <canvas id="game-canvas"></canvas>
+      <canvas id="confetti-canvas"></canvas>
+      <!-- Top-right controls -->
+      <div id="top-controls">
+        <button id="btn-audio" class="icon-btn">🔊</button>
+        <button id="btn-restart" class="icon-btn hidden">🔄</button>
+      </div>
+      <!-- Attribution -->
+      <div id="attribution">Inspired by LimeZu</div>
+    </div>
+
+    <!-- Bottom panel -->
+    <div id="bottom-panel">
+      <div id="bottom-title">🎂 給爸爸的生日卡片</div>
+      <div id="joystick-area">
+        <div id="joystick-base">
+          <div id="joystick-thumb"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
