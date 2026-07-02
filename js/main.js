@@ -7,6 +7,7 @@ import { updateNpcs } from './npc.js';
 import { initDialog, openDialog } from './dialog.js';
 import { initAudio, playBgm, toggleAudio } from './audio.js';
 import { initConfetti, startConfetti, resizeConfettiCanvas } from './confetti.js';
+import { loadAssets } from './assets.js';
 
 let canvas, ctx;
 
@@ -36,6 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
   ctx = canvas.getContext('2d');
   resize();
   initConfetti();
+  loadAssets(); // draw() no-ops on the room until sprites are ready
   window.addEventListener('resize', () => {
     resize();
     resizeConfettiCanvas();

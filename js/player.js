@@ -23,6 +23,11 @@ export function updatePlayer(state) {
   const { dx, dy } = state.joystick;
   if (dx === 0 && dy === 0) return;
 
+  // Track facing direction (dominant axis) for sprite selection
+  state.player.dir = Math.abs(dx) >= Math.abs(dy)
+    ? (dx > 0 ? 'right' : 'left')
+    : (dy > 0 ? 'down' : 'up');
+
   // Feet centre in world pixels
   const feetX = state.player.x + TILE / 2;
   const feetY = state.player.y + TILE;

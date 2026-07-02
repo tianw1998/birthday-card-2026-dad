@@ -1,6 +1,8 @@
+import { PLAYER_START, TILE } from './config.js';
+
 export const state = {
   phase: 'opening', // 'opening' | 'playing' | 'dialog' | 'ended'
-  player: { x: 7 * 32, y: 5 * 32 },
+  player: { x: PLAYER_START.tileX * TILE, y: PLAYER_START.tileY * TILE, dir: 'down' },
   joystick: { dx: 0, dy: 0 },
   npcs: {
     mom:     { read: false, showBubble: false },
