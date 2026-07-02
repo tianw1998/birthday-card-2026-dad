@@ -78,8 +78,8 @@ window.addEventListener('DOMContentLoaded', () => {
       // Must match the bubble position math in renderer.js's drawNpcs
       const destX = npc.tileX * TILE + npc.sitOffset.dx;
       const destY = npc.tileY * TILE + npc.sitOffset.dy;
-      const bx = ox + (destX + 48) * scale;
-      const by = oy + (destY - 18) * scale;
+      const bx = ox + (destX + 32) * scale;
+      const by = oy + (destY - 26) * scale;
       const dist = Math.hypot(clickX - bx, clickY - by);
       if (dist < 32) openDialog(npc.id);
     });

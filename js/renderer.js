@@ -95,10 +95,10 @@ function drawNpcs(ctx, state) {
     const labelX = destX + 32;
     drawLabel(ctx, npc.name, labelX, destY - 4);
 
-    // Chat bubble or checkmark above head
+    // Chat bubble or checkmark directly above the head/name tag
     const npcState = state.npcs[npc.id];
-    const bx = destX + 48;
-    const by = destY - 18;
+    const bx = destX + 32;
+    const by = destY - 26;
     ctx.font = '28px sans-serif';
     ctx.textAlign = 'center';
     if (npcState && npcState.read) {
