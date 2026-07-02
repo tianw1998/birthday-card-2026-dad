@@ -46,10 +46,10 @@ export const NPCS = [
 export const PLAYER_START = { tileX: 7, tileY: 5 };
 
 export const MESSAGES = {
-  mom: '爸爸生日快樂！這一年辛苦你了，感謝你一直照顧著我們這個家，希望你天天健康、開心、平安。我們愛你 ♥',
-  brother: '老爸生日快樂！從小到大你都默默扛起所有事，願你新的一歲少一點操心，多一點屬於自己的時間，好好休息。',
-  me: '爸生日快樂！我們都長大了，現在換我們來照顧你。希望你身體永遠健康，繼續當那個愛講冷笑話的老爸 :)',
+  mom: '親口對您說！',
+  brother: '親愛的爸爸，感謝您總是為家庭遮風擋雨，做我們最堅強的後盾。祝您生日快樂，天天開心，身體健康，永遠是我們心中最偉大的英雄！',
+  me: '在這個重要的日子，格外想念您，您給予的愛與關照、有您相伴的成長回憶也湧上心頭，祝爸爸生日快樂！',
 };
 
 export const PROXIMITY_TILES = 1.8;
-export const PLAYER_SPEED = 2.5;
+export const PLAYER_SPEED = 1.5;

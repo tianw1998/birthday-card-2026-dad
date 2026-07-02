@@ -7,7 +7,6 @@ export function initDialog(allReadCallback) {
   onAllReadCallback = allReadCallback;
 
   document.getElementById('btn-accept').addEventListener('click', () => closeDialog(true));
-  document.getElementById('btn-close').addEventListener('click',  () => closeDialog(false));
 }
 
 export function openDialog(npcId) {

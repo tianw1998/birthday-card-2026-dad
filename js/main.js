@@ -1,5 +1,5 @@
 import { state } from './state.js';
-import { draw, getOffset } from './renderer.js';
+import { draw, getView } from './renderer.js';
 import { TILE, NPCS } from './config.js';
 import { initJoystick } from './joystick.js';
 import { updatePlayer } from './player.js';
@@ -67,17 +67,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const rect   = canvas.getBoundingClientRect();
     const clickX = e.clientX - rect.left;
     const clickY = e.clientY - rect.top;
-    const { ox, oy } = getOffset(canvas.clientWidth, canvas.clientHeight);
+    const { ox, oy, scale } = getView(canvas.clientWidth, canvas.clientHeight);
 
     NPCS.forEach(npc => {
       if (!state.npcs[npc.id].showBubble) return;
-      // Bubble is drawn at (px + 10, py - 56) where px = ox + tileX*TILE + TILE/2
-      const px = ox + npc.tileX * TILE + TILE / 2;
-      const py = oy + npc.tileY * TILE + TILE;
-      const bx = px + 10;
-      const by = py - 56;
+      // Bubble is drawn in world coords at (tileX*TILE + TILE/2 + 10, tileY*TILE + TILE - 56);
+      // convert to screen coords, but keep the tap radius in screen pixels
+      const bx = ox + (npc.tileX * TILE + TILE / 2 + 10) * scale;
+      const by = oy + (npc.tileY * TILE + TILE - 56) * scale;
       const dist = Math.hypot(clickX - bx, clickY - by);
-      if (dist < 24) openDialog(npc.id);
+      if (dist < 26) openDialog(npc.id);
     });
   });
 

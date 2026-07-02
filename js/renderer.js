@@ -1,11 +1,15 @@
 import { TILE, COLS, ROWS, NPCS, PLAYER_START } from './config.js';
 
-export function getOffset(cw, ch) {
+// Fit the whole map inside the canvas: scale down on narrow screens,
+// allow up to 2x on large screens, and centre it.
+export function getView(cw, ch) {
   const mapW = COLS * TILE;
   const mapH = ROWS * TILE;
+  const scale = Math.min(cw / mapW, ch / mapH, 2);
   return {
-    ox: Math.max(0, (cw - mapW) / 2),
-    oy: Math.max(0, (ch - mapH) / 2),
+    scale,
+    ox: (cw - mapW * scale) / 2,
+    oy: (ch - mapH * scale) / 2,
   };
 }
 
@@ -327,9 +331,13 @@ export function draw(ctx, cw, ch, state) {
 
   ctx.imageSmoothingEnabled = false;
 
-  const { ox, oy } = getOffset(cw, ch);
-  drawFloor(ctx, ox, oy);
-  drawWalls(ctx, ox, oy);
-  drawFurniture(ctx, ox, oy);
-  drawCharacters(ctx, ox, oy, state);
+  const { ox, oy, scale } = getView(cw, ch);
+  ctx.save();
+  ctx.translate(ox, oy);
+  ctx.scale(scale, scale);
+  drawFloor(ctx, 0, 0);
+  drawWalls(ctx, 0, 0);
+  drawFurniture(ctx, 0, 0);
+  drawCharacters(ctx, 0, 0, state);
+  ctx.restore();
 }
