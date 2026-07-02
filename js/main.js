@@ -75,12 +75,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     NPCS.forEach(npc => {
       if (!state.npcs[npc.id].showBubble) return;
-      // Bubble is drawn in world coords at (tileX*TILE + TILE/2 + 10, tileY*TILE + TILE - 56);
-      // convert to screen coords, but keep the tap radius in screen pixels
-      const bx = ox + (npc.tileX * TILE + TILE / 2 + 10) * scale;
-      const by = oy + (npc.tileY * TILE + TILE - 56) * scale;
+      // Must match the bubble position math in renderer.js's drawNpcs
+      const destX = npc.tileX * TILE + npc.sitOffset.dx;
+      const destY = npc.tileY * TILE + npc.sitOffset.dy;
+      const bx = ox + (destX + 48) * scale;
+      const by = oy + (destY - 18) * scale;
       const dist = Math.hypot(clickX - bx, clickY - by);
-      if (dist < 26) openDialog(npc.id);
+      if (dist < 32) openDialog(npc.id);
     });
   });
 
@@ -95,6 +96,8 @@ window.addEventListener('DOMContentLoaded', () => {
     startConfetti(3000);
     setTimeout(() => {
       document.getElementById('endgame-overlay').classList.remove('hidden');
+      // Dad can always replay from here now that [完美收下] is gone.
+      document.getElementById('btn-restart').classList.remove('hidden');
     }, 3000);
   });
 
@@ -105,12 +108,6 @@ window.addEventListener('DOMContentLoaded', () => {
       state.npcs[k].showBubble = false;
     });
     document.getElementById('endgame-overlay').classList.add('hidden');
-    state.phase = 'playing';
-  });
-
-  document.getElementById('btn-done').addEventListener('click', () => {
-    document.getElementById('endgame-overlay').classList.add('hidden');
-    document.getElementById('btn-restart').classList.remove('hidden');
     state.phase = 'playing';
   });
 

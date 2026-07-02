@@ -102,7 +102,10 @@ export const FURNITURE = [
   { sheet: 'interiors', sx: 7*T,  sy: 15*T, sw: 4*T, sh: 3*T, dx: 3*T,     dy: 7*T, isRug: true },
   // dining nook (mom)
   { sheet: 'interiors', sx: 12*T, sy: 31*T, sw: 1*T, sh: 2*T, dx: 1*T,     dy: 5*T },      // mom's chair (faces right)
-  { sheet: 'interiors', sx: 6*T,  sy: 10*T, sw: 3*T, sh: 3*T, dx: 2*T,     dy: 5*T },      // table
+  // Table's true art is only 70x74px (not a full 3x3 tile block) — the
+  // sheet has empty padding around it that was originally included by
+  // mistake, leaving food placed near the "far" edge floating in that gap.
+  { sheet: 'interiors', sx: 6*T,  sy: 10*T + 2, sw: 70, sh: 74, dx: 2*T, dy: 5*T }, // table
   // right-wall seating (brother + me)
   { sheet: 'interiors', sx: 14*T, sy: 33*T, sw: 1*T, sh: 2*T, dx: 8*T,     dy: 4*T, mirror: true }, // brother's chair
   { sheet: 'interiors', sx: 14*T, sy: 33*T, sw: 1*T, sh: 2*T, dx: 8*T,     dy: 6*T, mirror: true }, // me's chair
@@ -155,7 +158,7 @@ export const GIFTS = [
 ];
 export const TABLE_ITEMS = [
   { sheet: 'interiors', sx: 12*T, sy: 14*T, sw: T, sh: T, dx: 2*T + 2,  dy: 5*T + 4 },  // cake slice
-  { sheet: 'interiors', sx: 12*T, sy: 13*T, sw: T, sh: T, dx: 4*T - 6,  dy: 5*T + 4 },  // berry plate
+  { sheet: 'interiors', sx: 12*T, sy: 13*T, sw: T, sh: T, dx: 2*T + 34, dy: 5*T + 4 },  // berry plate
   { sheet: 'interiors', sx: 11*T, sy: 12*T, sw: T, sh: T, dx: 2*T + 2,  dy: 6*T + 2 },  // pancake
 ];
 export const CAKE_POS = { dx: 3*T, dy: 5*T - 10 };

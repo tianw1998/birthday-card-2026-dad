@@ -98,8 +98,8 @@ function drawNpcs(ctx, state) {
     // Chat bubble or checkmark above head
     const npcState = state.npcs[npc.id];
     const bx = destX + 48;
-    const by = destY - 12;
-    ctx.font = '18px sans-serif';
+    const by = destY - 18;
+    ctx.font = '28px sans-serif';
     ctx.textAlign = 'center';
     if (npcState && npcState.read) {
       ctx.fillStyle = '#44BB44';
