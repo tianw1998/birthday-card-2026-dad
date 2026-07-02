@@ -19,6 +19,9 @@ export const COLLISION = [
   [1,1,1,1,1,1,1,1,1,1], // row 12: void border
 ];
 
+// Character art is native 16px-grid (half the 32px furniture grid), so every
+// character sprite is drawn at 2x. sitOffset is the hand-tuned pixel nudge
+// (at 2x scale) from the chair's tile origin to align the sitter with the seat.
 export const NPCS = [
   {
     id: 'mom',
@@ -27,6 +30,7 @@ export const NPCS = [
     title: '來自媽媽的祝福 💓',
     sitSheet: 'momSit',
     sitFrame: 0, // faces right, toward the table
+    sitOffset: { dx: -10, dy: -2 },
   },
   {
     id: 'brother',
@@ -35,6 +39,7 @@ export const NPCS = [
     title: '來自哥哥的祝福 🎁',
     sitSheet: 'brotherSit',
     sitFrame: 12, // faces left, into the room
+    sitOffset: { dx: -28, dy: -2 },
   },
   {
     id: 'me',
@@ -43,6 +48,7 @@ export const NPCS = [
     title: '來自弟弟的祝福 🎂',
     sitSheet: 'meSit',
     sitFrame: 12, // faces left, into the room
+    sitOffset: { dx: -28, dy: -2 },
   },
 ];
 

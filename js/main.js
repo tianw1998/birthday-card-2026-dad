@@ -37,7 +37,9 @@ window.addEventListener('DOMContentLoaded', () => {
   ctx = canvas.getContext('2d');
   resize();
   initConfetti();
-  loadAssets(); // draw() no-ops on the room until sprites are ready
+  // draw() no-ops on the room until sprites are ready; loadImage() already
+  // retries transient failures, so a rejection here means a real 404/bug.
+  loadAssets().catch(err => console.error('Asset load failed:', err));
   window.addEventListener('resize', () => {
     resize();
     resizeConfettiCanvas();

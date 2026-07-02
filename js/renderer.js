@@ -77,26 +77,28 @@ function drawTableSpread(ctx) {
   GIFTS.forEach(g => drawPixelArt(ctx, g.rows, g.dx, g.dy));
 }
 
-function drawNpcSprite(ctx, npc, px, py) {
+// Sitting poses span 2 native 16px cells (32px source) for a full side
+// silhouette; character art is half the furniture grid's resolution, so
+// it's drawn at 2x (64x64) to sit correctly-scaled in the 32px-tile room.
+function drawNpcSprite(ctx, npc, destX, destY) {
   const sheet = images[npc.sitSheet];
-  // Sitting poses span 2 source cells (32px) for a full side silhouette.
   const sx = npc.sitFrame * 16;
-  ctx.drawImage(sheet, sx, 0, 32, 32, px - 16, py - 34, 32, 32);
+  ctx.drawImage(sheet, sx, 0, 32, 32, destX, destY, 64, 64);
 }
 
 function drawNpcs(ctx, state) {
   NPCS.forEach(npc => {
-    const px = npc.tileX * TILE + TILE / 2;
-    const py = npc.tileY * TILE + TILE;
-    drawNpcSprite(ctx, npc, px, py);
+    const destX = npc.tileX * TILE + npc.sitOffset.dx;
+    const destY = npc.tileY * TILE + npc.sitOffset.dy;
+    drawNpcSprite(ctx, npc, destX, destY);
 
-    // Name label
-    drawLabel(ctx, npc.name, px, py - 40);
+    const labelX = destX + 32;
+    drawLabel(ctx, npc.name, labelX, destY - 4);
 
     // Chat bubble or checkmark above head
     const npcState = state.npcs[npc.id];
-    const bx = px + 10;
-    const by = py - 56;
+    const bx = destX + 48;
+    const by = destY - 12;
     ctx.font = '18px sans-serif';
     ctx.textAlign = 'center';
     if (npcState && npcState.read) {
@@ -133,12 +135,14 @@ function pickDadFrame(state) {
   return { sheet: images.dadRun, frame };
 }
 
+// Dad's native art is 16px-grid (16 wide x 32 tall); drawn at 2x (32x64)
+// so his scale matches the 32px-tile furniture, feet aligned to tile bottom.
 function drawDad(ctx, state) {
-  const px = state.player.x + TILE / 2;
-  const py = state.player.y + TILE;
+  const destX = state.player.x;
+  const destY = state.player.y - TILE;
   const { sheet, frame } = pickDadFrame(state);
-  ctx.drawImage(sheet, frame * 16, 0, 16, 32, px - 16, py - 34, 32, 34);
-  drawLabel(ctx, '爸', px, py - 40);
+  ctx.drawImage(sheet, frame * 16, 0, 16, 32, destX, destY, 32, 64);
+  drawLabel(ctx, '爸', destX + 16, destY - 4);
 }
 
 export function draw(ctx, cw, ch, state) {
